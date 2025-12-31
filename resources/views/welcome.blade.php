@@ -4,8 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Alan Carabali">
+    <meta name="description" content="API para obtener información de países, departamentos y ciudades.">
+    <meta name="keywords" content="API, Países, Departamentos, Ciudades, Geonames, Laravel">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
 
-    <title>Laravel</title>
+    <title>AF DEVELOPER API</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -955,31 +961,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-      function loadCiudades() {
-                const stateGeonameId = $(this).val();
+    function loadCiudades() {
+        const stateGeonameId = $(this).val();
 
-                if (stateGeonameId) {
-                    $('#ciudad').prop('disabled', false);
+        if (stateGeonameId) {
+            $('#ciudad').prop('disabled', false);
 
-                    $.ajax({
-                        url: `/api/departments/${stateGeonameId}/cities`,
-                        method: 'GET',
-                        success: function(response) {
-                            const cities = response;
-                            $('#ciudad').empty().append(new Option("Seleccione una ciudad", ""));
+            $.ajax({
+                url: `/api/departments/${stateGeonameId}/cities`,
+                method: 'GET',
+                success: function(response) {
+                    const cities = response;
+                    $('#ciudad').empty().append(new Option("Seleccione una ciudad", ""));
 
-                            cities.forEach(city => {
-                                $('#ciudad').append(new Option(city.name, city.geonameId));
-                            });
-                        },
-                        error: function() {
-                            showErrorModal('Error al obtener las ciudades.');
-                        }
+                    cities.forEach(city => {
+                        $('#ciudad').append(new Option(city.name, city.geonameId));
                     });
-                } else {
-                    $('#ciudad').prop('disabled', true).empty().append(new Option(
-                        "Seleccione un departamento primero", ""));
+                },
+                error: function() {
+                    showErrorModal('Error al obtener las ciudades.');
                 }
-            }
-
+            });
+        } else {
+            $('#ciudad').prop('disabled', true).empty().append(new Option(
+                "Seleccione un departamento primero", ""));
+        }
+    }
 </script>
