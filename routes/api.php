@@ -17,4 +17,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/countries/{country}/departments', [LocationController::class, 'departments']);
 Route::get('/departments/{department}/cities', [LocationController::class, 'cities']);
+Route::get('/city/{city}', [LocationController::class, 'city']);
 

@@ -38,4 +38,15 @@ class LocationController extends Controller
                 ->get()
         ]);
     }
+
+    public function city($cityId)
+    {
+        return City::where('id', $cityId)
+        ->orderBy('name')
+        ->get([
+                'id as geonameId',
+                'name',
+              
+        ]);
+    }
 }
