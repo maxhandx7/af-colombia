@@ -49,4 +49,27 @@ class LocationController extends Controller
               
         ]);
     }
+
+    public function department($departmentId)
+    {
+        return Department::where('id', $departmentId)
+        ->orderBy('name')
+        ->get([
+                'id as geonameId',
+                'name',
+              
+        ]);
+    }
+
+    public function country($countryId)
+    {
+        return Country::where('country_id', $countryId)
+        ->orderBy('name')
+        ->get([
+                'id as geonameId',
+                'name',
+                'code',
+              
+        ]);
+    }
 }
